@@ -109,7 +109,9 @@ func dot(v1, v2 Vector) float64 {
 }
 
 // Cross computes the cross product of two vectors.
-func Cross(v1, v2 Vector) Vector {
+func Cross(v1, v2 Vector) Vector
+
+func cross(v1, v2 Vector) Vector {
 	return Vector{
 		v1[1]*v2[2] - v1[2]*v2[1],
 		v1[2]*v2[0] - v1[0]*v2[2],

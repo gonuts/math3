@@ -21,3 +21,10 @@ TEXT ·Sub(SB),$0-72
 // Return: +48(FP)
 TEXT ·Dot(SB),$0-56
     JMP         ·dot(SB)
+
+// func Cross(v1, v2 Vector) Vector
+// v1: +0(FP)
+// v2: +24(FP)
+// Return: +48(FP)
+TEXT ·Cross(SB),$0-72
+    JMP         ·cross(SB)

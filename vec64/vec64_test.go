@@ -63,6 +63,27 @@ func BenchmarkDot(b *testing.B) {
 	}
 }
 
+func TestCross(t *testing.T) {
+	tests := []struct {
+		A, B, Result Vector
+	}{
+		{Vector{1, 0, 0}, Vector{0, 1, 0}, Vector{0, 0, 1}},
+		{Vector{2, 0, 0}, Vector{0, 3, 0}, Vector{0, 0, 6}},
+		{Vector{0, 1, 0}, Vector{1, 0, 0}, Vector{0, 0, -1}},
+	}
+	for _, tt := range tests {
+		if r := Cross(tt.A, tt.B); r != tt.Result {
+			t.Errorf("Cross(%v, %v) != %v (got %v)", tt.A, tt.B, tt.Result, r)
+		}
+	}
+}
+
+func BenchmarkCross(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Cross(Vector{1, 2, 3}, Vector{4, 5, 6})
+	}
+}
+
 func TestNormalize(t *testing.T) {
 	tests := []struct {
 		V        Vector
