@@ -54,11 +54,11 @@ func (v Vector) IsZero() bool {
 }
 
 func (v Vector) String() string {
-	return fmt.Sprintf("<%.4f, %.4f, %.4f>", v[0], v[1], v[2])
+	return fmt.Sprintf("[%.4f %.4f %.4f]", v[0], v[1], v[2])
 }
 
 func (v Vector) GoString() string {
-	return fmt.Sprintf("vector.Vector{%#v, %#v, %#v}", v[0], v[1], v[2])
+	return fmt.Sprintf("vec64.Vector{%#v, %#v, %#v}", v[0], v[1], v[2])
 }
 
 // Add computes the sum of two vectors.
