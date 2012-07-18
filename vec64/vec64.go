@@ -1,3 +1,4 @@
+// Package vec64 operates on three-dimensional float64 vectors.
 package vec64
 
 import (
@@ -60,6 +61,13 @@ func (v Vector) GoString() string {
 	return fmt.Sprintf("vector.Vector{%#v, %#v, %#v}", v[0], v[1], v[2])
 }
 
+// Add computes the sum of two vectors.
+func Add(v1, v2 Vector) Vector
+
+func add(v1, v2 Vector) Vector {
+	return Vector{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]}
+}
+
 // Sum computes the sum of two or more vectors.
 func Sum(v1, v2 Vector, vn ...Vector) Vector {
 	result := Vector{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]}
@@ -76,6 +84,13 @@ func (v Vector) AddScalar(s float64) Vector {
 	return Vector{v[0] + s, v[1] + s, v[2] + s}
 }
 
+// Sub computes the difference of two vectors.
+func Sub(v1, v2 Vector) Vector
+
+func sub(v1, v2 Vector) Vector {
+	return Vector{v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]}
+}
+
 // Scale multiplies all of a vector's components by a scalar.
 func (v Vector) Scale(s float64) Vector {
 	return Vector{v[0] * s, v[1] * s, v[2] * s}
@@ -84,6 +99,13 @@ func (v Vector) Scale(s float64) Vector {
 // Mul multiplies the components of two vectors together.
 func Mul(v1, v2 Vector) Vector {
 	return Vector{v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]}
+}
+
+// Dot computes the dot product of two vectors.
+func Dot(v1, v2 Vector) float64
+
+func dot(v1, v2 Vector) float64 {
+	return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2]
 }
 
 // Cross computes the cross product of two vectors.
