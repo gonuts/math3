@@ -5,7 +5,7 @@
 // v1: +0(FP)
 // v2: +24(FP)
 // Return: +48(FP)
-TEXT ·Add(SB),$0-72
+TEXT ·Add(SB),7,$0-72
     MOVUPD      v1+0(FP), X0
     MOVUPD      v2+24(FP), X2
     ADDPD       X2, X0
@@ -20,7 +20,7 @@ TEXT ·Add(SB),$0-72
 // v1: +0(FP)
 // v2: +24(FP)
 // Return: +48(FP)
-TEXT ·Sub(SB),$0-72
+TEXT ·Sub(SB),7,$0-72
     MOVUPD      v1+0(FP), X0
     MOVUPD      v2+24(FP), X2
     SUBPD       X2, X0
@@ -35,7 +35,7 @@ TEXT ·Sub(SB),$0-72
 // v1: +0(FP)
 // v2: +24(FP)
 // Return: +48(FP)
-TEXT ·Dot(SB),$0-56
+TEXT ·Dot(SB),7,$0-56
     MOVUPD      v1+0(FP), X0
     MOVUPD      v2+24(FP), X2
     MULPD       X2, X0
@@ -53,7 +53,7 @@ TEXT ·Dot(SB),$0-56
 // v1: +0(FP)
 // v2: +24(FP)
 // Return: +48(FP)
-TEXT ·Cross(SB),$0-72
+TEXT ·Cross(SB),7,$0-72
     // X
     MOVUPD      v1YZ+8(FP), X0
     SHUFPD      $1, X0, X0
