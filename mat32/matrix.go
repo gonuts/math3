@@ -4,6 +4,7 @@ package mat32
 import (
 	"bitbucket.org/zombiezen/math3/vec32"
 	"fmt"
+	"math"
 )
 
 // Matrix holds a 4x4 matrix.  Each vector is a column of the matrix.
@@ -11,10 +12,10 @@ type Matrix [4]vec32.Vector
 
 // Identity can be multiplied by another matrix to produce the same matrix.
 var Identity = Matrix{
-	{1.0, 0.0, 0.0, 0.0},
-	{0.0, 1.0, 0.0, 0.0},
-	{0.0, 0.0, 1.0, 0.0},
-	{0.0, 0.0, 0.0, 1.0},
+	{1, 0, 0, 0},
+	{0, 1, 0, 0},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1},
 }
 
 func (m Matrix) String() string {
@@ -45,20 +46,34 @@ func (m Matrix) Transpose() Matrix {
 // Translate post-multiplies a translation by v and returns the result.
 func (m Matrix) Translate(v vec32.Vector) Matrix {
 	return Mul(m, Matrix{
-		{1.0, 0.0, 0.0, 0.0},
-		{0.0, 1.0, 0.0, 0.0},
-		{0.0, 0.0, 1.0, 0.0},
-		{v[0], v[1], v[2], 1.0},
+		{1, 0, 0, 0},
+		{0, 1, 0, 0},
+		{0, 0, 1, 0},
+		{v[0], v[1], v[2], 1},
+	})
+}
+
+// Rotate post-multiplies a rotation around an axis. The angle is in radians and
+// the axis will be normalized.
+func (m Matrix) Rotate(angle float32, axis vec32.Vector) Matrix {
+	axis = axis.Normalize()
+	x, y, z := axis[0], axis[1], axis[2]
+	sin, cos := float32(math.Sin(float64(angle))), float32(math.Cos(float64(angle)))
+	return Mul(m, Matrix{
+		{cos + x*x*(1-cos), y*x*(1-cos) + z*sin, z*x*(1-cos) - y*sin, 0},
+		{x*y*(1-cos) - z*sin, cos + y*y*(1-cos), z*y*(1-cos) + x*sin, 0},
+		{x*z*(1-cos) + y*sin, y*z*(1-cos) - x*sin, cos + z*z*(1-cos), 0},
+		{0, 0, 0, 1},
 	})
 }
 
 // Scale post-multiplies a scale and returns the result.
-func (m Matrix) Scale(x, y, z float32) Matrix {
+func (m Matrix) Scale(scale vec32.Vector) Matrix {
 	return Mul(m, Matrix{
-		{x, 0.0, 0.0, 0.0},
-		{0.0, y, 0.0, 0.0},
-		{0.0, 0.0, z, 0.0},
-		{0.0, 0.0, 0.0, 1.0},
+		{scale[0], 0, 0, 0},
+		{0, scale[1], 0, 0},
+		{0, 0, scale[2], 0},
+		{0, 0, 0, 1},
 	})
 }
 
