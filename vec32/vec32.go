@@ -9,6 +9,11 @@ import (
 // Vector holds a four-dimensional vector. The default value is a zero vector.
 type Vector [4]float32
 
+// Vec3 returns a copy of the vector with the 4th component set to zero.
+func (v Vector) Vec3() Vector {
+	return Vector{v[0], v[1], v[2], v[3]}
+}
+
 // Normalize creates a new vector that is of unit length in the same direction as the vector.
 func (v Vector) Normalize() Vector {
 	vlen := v.Length()
@@ -84,16 +89,6 @@ func Sum(v1, v2 Vector, vn ...Vector) Vector {
 		result[3] += u[3]
 	}
 	return result
-}
-
-// AddScalar adds a scalar to the vector's first three components.
-func (v Vector) AddScalar(s float32) Vector {
-	return Vector{v[0] + s, v[1] + s, v[2] + s, v[3] + s}
-}
-
-// AddScalar4 adds a scalar to all of a vector's components.
-func (v Vector) AddScalar4(s float32) Vector {
-	return Vector{v[0] + s, v[1] + s, v[2] + s, v[3]}
 }
 
 // Sub computes the difference of two vectors.
