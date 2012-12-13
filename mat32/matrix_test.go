@@ -1,6 +1,10 @@
 package mat32
 
-import "testing"
+import (
+	"bitbucket.org/zombiezen/math3/vec32"
+	"math"
+	"testing"
+)
 
 func TestTranspose(t *testing.T) {
 	tests := []struct {
@@ -60,7 +64,7 @@ func TestMul(t *testing.T) {
 	}
 	for _, test := range tests {
 		out := Mul(test.A, test.B)
-		if out != test.Out {
+		if !checkMatrix(out, test.Out, 0.01) {
 			t.Errorf("Mul(%#v, %#v) = %#v; want %#v", test.A, test.B, out, test.Out)
 		}
 	}
@@ -82,4 +86,62 @@ func BenchmarkMul(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Mul(m1, m2)
 	}
+}
+
+func TestRotate(t *testing.T) {
+	tests := []struct {
+		In    Matrix
+		Angle float32
+		Axis  vec32.Vector
+		Out   Matrix
+	}{
+		{
+			Identity,
+			math.Pi / 2, vec32.Vector{1, 0, 0},
+			Matrix{
+				{1, 0, 0, 0},
+				{0, 0, 1, 0},
+				{0, -1, 0, 0},
+				{0, 0, 0, 1},
+			},
+		},
+		{
+			Identity,
+			math.Pi / 2, vec32.Vector{0, 1, 0},
+			Matrix{
+				{0, 0, -1, 0},
+				{0, 1, 0, 0},
+				{1, 0, 0, 0},
+				{0, 0, 0, 1},
+			},
+		},
+		{
+			Identity,
+			math.Pi / 2, vec32.Vector{0, 0, 1},
+			Matrix{
+				{0, 1, 0, 0},
+				{-1, 0, 0, 0},
+				{0, 0, 1, 0},
+				{0, 0, 0, 1},
+			},
+		},
+	}
+	for _, test := range tests {
+		out := test.In.Rotate(test.Angle, test.Axis)
+		if !checkMatrix(out, test.Out, 0.01) {
+			t.Errorf("%#v.Rotate(%v, %v) = %#v; want %#v", test.In, test.Angle, test.Axis, out, test.Out)
+		}
+	}
+}
+
+// checkMatrix returns whether m1 ~ m2, given a tolerance.
+func checkMatrix(m1, m2 Matrix, tol float32) bool {
+	for i := 0; i < 4; i++ {
+		for j := 0; j < 4; j++ {
+			if m2[i][j] > m1[i][j]+tol || m2[i][j] < m1[i][j]-tol {
+				return false
+			}
+		}
+	}
+	return true
 }
