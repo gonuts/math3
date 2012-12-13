@@ -31,11 +31,11 @@ TEXT ·Dot(SB),7,$0-36
     MOVUPS      v1+0(FP), X0
     MOVUPS      v2+16(FP), X1
     MULPS       X1, X0
-    MOVLHPS     X0, X1
-    ADDPS       X1, X0
-    SHUFPS      $0x80, X0, X1
-    ADDPS       X1, X0
-    SHUFPS      $0x03, X0, X0
+    MOVLHPS     X0, X2
+    MOVHLPS     X0, X2
+    ADDPS       X2, X0
+    SHUFPS      $0x03, X0, X2
+    ADDSS       X2, X0
     MOVSS       X0, ret+32(FP)
     RET
 
