@@ -73,7 +73,7 @@ func TestCross(t *testing.T) {
 	}
 	for _, tt := range tests {
 		if r := Cross(tt.A, tt.B); r != tt.Result {
-			t.Errorf("Cross(%v, %v) != %v (got %v)", tt.A, tt.B, tt.Result, r)
+			t.Errorf("Cross(%v, %v) != %#v (got %#v)", tt.A, tt.B, tt.Result, r)
 		}
 	}
 }

@@ -1,7 +1,7 @@
-package mat32
+package mat64
 
 import (
-	"bitbucket.org/zombiezen/math3/vec32"
+	"bitbucket.org/zombiezen/math3/vec64"
 	"math"
 	"testing"
 )
@@ -91,13 +91,13 @@ func BenchmarkMul(b *testing.B) {
 func TestRotate(t *testing.T) {
 	tests := []struct {
 		In    Matrix
-		Angle float32
-		Axis  vec32.Vector
+		Angle float64
+		Axis  vec64.Vector
 		Out   Matrix
 	}{
 		{
 			Identity,
-			math.Pi / 2, vec32.Vector{1, 0, 0},
+			math.Pi / 2, vec64.Vector{1, 0, 0},
 			Matrix{
 				{1, 0, 0, 0},
 				{0, 0, 1, 0},
@@ -107,7 +107,7 @@ func TestRotate(t *testing.T) {
 		},
 		{
 			Identity,
-			math.Pi / 2, vec32.Vector{0, 1, 0},
+			math.Pi / 2, vec64.Vector{0, 1, 0},
 			Matrix{
 				{0, 0, -1, 0},
 				{0, 1, 0, 0},
@@ -117,7 +117,7 @@ func TestRotate(t *testing.T) {
 		},
 		{
 			Identity,
-			math.Pi / 2, vec32.Vector{0, 0, 1},
+			math.Pi / 2, vec64.Vector{0, 0, 1},
 			Matrix{
 				{0, 1, 0, 0},
 				{-1, 0, 0, 0},
@@ -135,7 +135,7 @@ func TestRotate(t *testing.T) {
 }
 
 // checkMatrix returns whether m1 ~ m2, given a tolerance.
-func checkMatrix(m1, m2 Matrix, tol float32) bool {
+func checkMatrix(m1, m2 Matrix, tol float64) bool {
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 4; j++ {
 			if m2[i][j] > m1[i][j]+tol || m2[i][j] < m1[i][j]-tol {
