@@ -70,6 +70,7 @@ func TestCross(t *testing.T) {
 		{Vector{1, 0, 0}, Vector{0, 1, 0}, Vector{0, 0, 1}},
 		{Vector{2, 0, 0}, Vector{0, 3, 0}, Vector{0, 0, 6}},
 		{Vector{0, 1, 0}, Vector{1, 0, 0}, Vector{0, 0, -1}},
+		{Vector{0, 0, 1}, Vector{1, 0, 0}, Vector{0, 1, 0}},
 	}
 	for _, tt := range tests {
 		if r := Cross(tt.A, tt.B); r != tt.Result {

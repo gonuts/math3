@@ -68,7 +68,7 @@ TEXT ·Cross(SB),7,$0-96
     SUBPD       X1, X0
     MOVHPD      X0, retX+64(FP)
     // Y
-    MOVHPD      v1Z+24(FP), X0
+    MOVHPD      v1Z+16(FP), X0
     MOVLPD      v1X+0(FP), X0
     MOVHPD      v2X+32(FP), X1
     MOVLPD      v2Z+48(FP), X1
