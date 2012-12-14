@@ -20,13 +20,13 @@ var Identity = Matrix{
 
 func (m Matrix) String() string {
 	var result string
-	for i, row := range m {
+	for i, row := range m.Transpose() {
 		format := "| %5.2f %5.2f %5.2f %5.2f |\n"
 		switch i {
 		case 0:
 			format = "/ %5.2f %5.2f %5.2f %5.2f \\\n"
 		case len(m) - 1:
-			format = "\\ %5.2f %5.2f %5.2f %5.2f /\n"
+			format = "\\ %5.2f %5.2f %5.2f %5.2f /"
 		}
 		result += fmt.Sprintf(format, row[0], row[1], row[2], row[3])
 	}
