@@ -98,4 +98,3 @@ func (m Matrix) Transform(u vec64.Vector) (v vec64.Vector) {
 	}
 	return
 }
-
