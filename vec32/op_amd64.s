@@ -34,8 +34,9 @@ TEXT ·Dot(SB),7,$0-36
     MOVLHPS     X0, X2
     MOVHLPS     X0, X2
     ADDPS       X2, X0
-    SHUFPS      $0x03, X0, X2
-    ADDSS       X2, X0
+    MOVUPS      X0, X1
+    SHUFPS      $0x03, X1, X1
+    ADDSS       X1, X0
     MOVSS       X0, ret+32(FP)
     RET
 
