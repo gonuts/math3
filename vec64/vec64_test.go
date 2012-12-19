@@ -49,6 +49,7 @@ func TestDot(t *testing.T) {
 	}{
 		{Vector{0, 0, 0}, Vector{0, 0, 0}, 0},
 		{Vector{1, 2, 3}, Vector{4, 5, 6}, 32},
+		{Vector{1, 2, 3, 4}, Vector{5, 6, 7, 8}, 70},
 	}
 	for _, tt := range tests {
 		if r := Dot(tt.A, tt.B); r != tt.Result {
