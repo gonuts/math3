@@ -8,6 +8,8 @@ Download and install math3 with::
 
     go get -u bitbucket.org/zombiezen/math3/...
 
+Documentation is available at http://godoc.org/bitbucket.org/zombiezen/math3.
+
 License
 =========
 
