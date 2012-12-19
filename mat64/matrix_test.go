@@ -30,7 +30,7 @@ func TestTranspose(t *testing.T) {
 	for _, test := range tests {
 		out := test.In.Transpose()
 		if out != test.Out {
-			t.Errorf("%#v.Transpose() = %#v; want %#v", test.In, out, test.Out)
+			t.Errorf("%v.Transpose() =\n%v; want\n%v", test.In, out, test.Out)
 		}
 	}
 }
@@ -85,7 +85,7 @@ func TestMul(t *testing.T) {
 	for _, test := range tests {
 		out := Mul(test.A, test.B)
 		if !checkMatrix(out, test.Out, 0.01) {
-			t.Errorf("Mul(%#v, %#v) = %#v; want %#v", test.A, test.B, out, test.Out)
+			t.Errorf("Mul(\n%v,\n%v) =\n%v; want\n%v", test.A, test.B, out, test.Out)
 		}
 	}
 }
@@ -149,7 +149,7 @@ func TestRotate(t *testing.T) {
 	for _, test := range tests {
 		out := test.In.Rotate(test.Angle, test.Axis)
 		if !checkMatrix(out, test.Out, 0.01) {
-			t.Errorf("%#v.Rotate(%v, %v) = %#v; want %#v", test.In, test.Angle, test.Axis, out, test.Out)
+			t.Errorf("%v.Rotate(%v, %v) =\n%v; want\n%v", test.In, test.Angle, test.Axis, out, test.Out)
 		}
 	}
 }
